@@ -7,7 +7,8 @@ import {
   Text,
   FlatList,
   View,
-  StatusBar
+  StatusBar,
+  Button
 } from 'react-native';
 
 import BookcaseItem from './BookcaseItem';
@@ -63,6 +64,7 @@ _keyExtractor = (item, index) => item.id.toString();
           keyExtractor={this._keyExtractor}
           renderItem={this._renderItem}
         />
+        <Button title='Go to Screen1' onPress={() => {this.props.navigation.navigate('Screen1')}}/>
       </View>
     );
   }

@@ -10,6 +10,7 @@ import Screen1 from '../screens/Screen1';
 import ExploreScreen from '../screens/Explore';
 import AddBookScreen from '../screens/AddBook';
 import ListsScreen from '../screens/Lists';
+import EditBook from '../screens/EditBook';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -20,6 +21,7 @@ const HomeStack = createStackNavigator(
   {
     Home: HomeScreen,
     Screen1: Screen1,
+    EditBook: EditBook,
   },
   config
 );
