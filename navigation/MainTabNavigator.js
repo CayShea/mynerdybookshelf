@@ -1,13 +1,15 @@
 import React from 'react';
 import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import { Icon } from 'react-native-elements';
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 import Screen1 from '../screens/Screen1';
-import BooksScreen from '../screens/BooksScreen';
+import ExploreScreen from '../screens/Explore';
+import AddBookScreen from '../screens/AddBook';
+import ListsScreen from '../screens/Lists';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -18,63 +20,97 @@ const HomeStack = createStackNavigator(
   {
     Home: HomeScreen,
     Screen1: Screen1,
-    BooksScreen: BooksScreen
   },
   config
 );
 
 HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
+  tabBarLabel: 'Bookshelf',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
       name={
         Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
+          ? `ios-bookmarks${focused ? '' : '-outline'}`
+          : 'md-bookmarks'
       }
+      
     />
   ),
 };
 
 HomeStack.path = '';
 
-const LinksStack = createStackNavigator(
+const ExploreStack = createStackNavigator(
   {
-    Links: LinksScreen,
+    Explore: ExploreScreen,
   },
   config
 );
 
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
+ExploreStack.navigationOptions = {
+  tabBarLabel: 'Explore',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-map-outline' : 'ios-map'} />
   ),
 };
 
-LinksStack.path = '';
+ExploreStack.path = '';
 
-const SettingsStack = createStackNavigator(
+const AddBookStack = createStackNavigator(
   {
-    Settings: SettingsScreen,
+    AddBook: AddBookScreen,
   },
   config
 );
 
-SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
+AddBookStack.navigationOptions = {
+  tabBarLabel: 'Add Book',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-add-circle-outline' : 'ios-add-circle-outline'} />
+  ),
+};
+
+AddBookStack.path = '';
+
+const ListsStack = createStackNavigator(
+  {
+    ListsExplore: ListsScreen,
+  },
+  config
+);
+
+ListsStack.navigationOptions = {
+  tabBarLabel: 'Lists',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-map-outline' : 'ios-map'} />
+  ),
+};
+
+ListsStack.path = '';
+
+const ProfileStack = createStackNavigator(
+  {
+    Profile: ProfileScreen,
+  },
+  config
+);
+
+ProfileStack.navigationOptions = {
+  tabBarLabel: 'Profile',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
   ),
 };
 
-SettingsStack.path = '';
+ProfileStack.path = '';
 
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
-  LinksStack,
-  SettingsStack,
+  ExploreStack,
+  AddBookStack,
+  ListsStack,
+  ProfileStack,
 });
 
 tabNavigator.path = '';

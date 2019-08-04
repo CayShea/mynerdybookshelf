@@ -1,145 +1,84 @@
 import * as WebBrowser from 'expo-web-browser';
-import React from 'react';
+import React, { Component } from 'react';
 import {
   Image,
   Platform,
-  ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
+  FlatList,
   View,
-  Button
+  StatusBar
 } from 'react-native';
 
-import { MonoText } from '../components/StyledText';
+import BookcaseItem from './BookcaseItem';
 
-export default class HomeScreen extends React.Component {
-  render(){
+export default class HomeScreen extends Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      books: [
+        {
+          id: 1,
+          title: 'Harry Potter and the Goblet of Fire',
+          author: 'J. K. Rowling',
+          thumbnail: 'https://covers.openlibrary.org/w/id/7984916-M.jpg'
+        },
+        {
+          id: 2,
+          title: 'The Hobbit',
+          author: 'J. R. R. Tolkien',
+          thumbnail: 'https://covers.openlibrary.org/w/id/6979861-M.jpg'
+        },
+        {
+          id: 3,
+          title: '1984',
+          author: 'George Orwell',
+          thumbnail: 'https://covers.openlibrary.org/w/id/7222246-M.jpg'
+        }
+      ]
+    }
+  }
+
+  _renderItem = ({item}) => (
+    <BookcaseItem
+      id={item.id}
+      title={item.title}
+      author={item.author}
+      thumbnail={item.thumbnail}
+      />
+  );
+
+ 
+_keyExtractor = (item, index) => item.id.toString();
+
+  render() {
     return (
       <View style={styles.container}>
-        <ScrollView
-          style={styles.container}
-          contentContainerStyle={styles.contentContainer}>
-          <View style={styles.welcomeContainer}>
-            <Image
-              source={
-                __DEV__
-                  ? require('../assets/images/robot-dev.png')
-                  : require('../assets/images/robot-prod.png')
-              }
-              style={styles.welcomeImage}
-            />
-          </View>
-        
-        <Button title={('Browse Books')} onPress={() => {this.props.navigation.navigate('BooksScreen')}}/>
-
-        </ScrollView>
+        <StatusBar
+          barStyle="light-content"
+        />
+        <FlatList
+          data={this.state.books}
+          keyExtractor={this._keyExtractor}
+          renderItem={this._renderItem}
+        />
       </View>
     );
   }
-  }
+}
+
   
 
 HomeScreen.navigationOptions = {
   header: null,
-  title: 'Home'
+  title: 'Bookshelf'
 };
-
-
-
-
-
-
 
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  textColor:{
-    color:"#d61b1b"
-  },
-  developmentModeText: {
-    marginBottom: 20,
-    color: 'rgba(0,0,0,0.4)',
-    fontSize: 14,
-    lineHeight: 19,
-    textAlign: 'center',
-  },
-  contentContainer: {
-    paddingTop: 30,
-  },
-  welcomeContainer: {
-    alignItems: 'center',
-    marginTop: 10,
-    marginBottom: 20,
-  },
-  welcomeImage: {
-    width: 100,
-    height: 80,
-    resizeMode: 'contain',
-    marginTop: 3,
-    marginLeft: -10,
-  },
-  getStartedContainer: {
-    alignItems: 'center',
-    marginHorizontal: 50,
-  },
-  homeScreenFilename: {
-    marginVertical: 7,
-  },
-  codeHighlightText: {
-    color: 'rgba(96,100,109, 0.8)',
-  },
-  codeHighlightContainer: {
-    backgroundColor: 'rgba(0,0,0,0.05)',
-    borderRadius: 3,
-    paddingHorizontal: 4,
-  },
-  getStartedText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    lineHeight: 24,
-    textAlign: 'center',
-  },
-  tabBarInfoContainer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    ...Platform.select({
-      ios: {
-        shadowColor: 'black',
-        shadowOffset: { width: 0, height: -3 },
-        shadowOpacity: 0.1,
-        shadowRadius: 3,
-      },
-      android: {
-        elevation: 20,
-      },
-    }),
-    alignItems: 'center',
-    backgroundColor: '#fbfbfb',
-    paddingVertical: 20,
-  },
-  tabBarInfoText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    textAlign: 'center',
-  },
-  navigationFilename: {
-    marginTop: 5,
-  },
-  helpContainer: {
-    marginTop: 15,
-    alignItems: 'center',
-  },
-  helpLink: {
-    paddingVertical: 15,
-  },
-  helpLinkText: {
-    fontSize: 14,
-    color: '#2e78b7',
-  },
+      flex: 1,
+      backgroundColor: '#F5FCFF',
+  }
 });
