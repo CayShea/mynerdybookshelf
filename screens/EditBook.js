@@ -5,7 +5,7 @@ import {
   View
 } from 'react-native';
 
-export default class EditBook extends Component {
+export default class EditBookScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
@@ -17,7 +17,8 @@ export default class EditBook extends Component {
   }
 }
 
-EditBook.navigationOptions = {
+
+EditBookScreen.navigationOptions = {
     title: 'EditBook',
   };
 

@@ -17,6 +17,7 @@ export default class HomeScreen extends Component {
 
   constructor(props){
     super(props);
+
     this.state = {
       books: [
         {
@@ -41,13 +42,26 @@ export default class HomeScreen extends Component {
     }
   }
 
+
+  // _onEditBook = (item) => {
+  //   console.log('something');
+
+  //   // CURRENT STOPPING POINT IN CODE> Struggling with getting id to pass to child properly.
+  //   console.log(item);
+  //  However, am able to navigate effectively here.
+  //   // this.props.navigation.navigate('EditBook', {id:id})
+  // }
+
+
   _renderItem = ({item}) => (
     <BookcaseItem
       id={item.id}
       title={item.title}
       author={item.author}
       thumbnail={item.thumbnail}
+      // onPress={this._onEditBook}
       />
+    
   );
 
  
@@ -64,7 +78,7 @@ _keyExtractor = (item, index) => item.id.toString();
           keyExtractor={this._keyExtractor}
           renderItem={this._renderItem}
         />
-        <Button title='Go to Screen1' onPress={() => {this.props.navigation.navigate('Screen1')}}/>
+        <Button title='Go to Screen1' onPress={() => {this.props.navigation.navigate('EditBookScreen')}}/>
       </View>
     );
   }

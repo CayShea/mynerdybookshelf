@@ -6,19 +6,25 @@ import {
     Image,
     View
   } from 'react-native';
-
+  import { withNavigation } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 
-export default class BookcaseItem extends Component {
 
-    _onEditBook = () => {
-        let id = this.props.id;
-        this.props.navigation.navigate('EditBook', {id: id})
-    }
-    
+class BookcaseItem extends React.Component {
+
+
+  _onEditBook = () => {
+    // STILL receiveing error for navigation-> 'not an object'
+    // let id = this.props.id;
+    // console.log(`this book's id is: ${id}`);
+    console.log('working to here');
+    this.props.navigation.navigate('EditBookScreen');
+  }
+
     render() {
+      // const { navigate } = this.props.navigation;
         return(
-          <TouchableOpacity onPress={this._onEditBook}>
+          <TouchableOpacity onPress={this._onEditBook}>     
           <View style={styles.rowContainer}>
             <Image source={{uri: this.props.thumbnail}}
             style={styles.thumbnail}
@@ -36,6 +42,8 @@ export default class BookcaseItem extends Component {
         );
     }
 }
+
+export default withNavigation(BookcaseItem);
 
 const styles = StyleSheet.create({
   rowContainer: {

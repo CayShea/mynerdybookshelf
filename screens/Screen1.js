@@ -27,14 +27,12 @@ export default class Screen1 extends React.Component {
         console.log('didUpdate');
     }
   
-  
-  
-  
     render(){
     debugger;
     console.log('rendering')
     return (
         <ScrollView style={styles.container}>
+            
         </ScrollView>
       );}
     }  
